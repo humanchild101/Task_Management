@@ -14,6 +14,17 @@ CREATE TABLE `users` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `task_management`.`users`
+(`first_name`,
+`last_name`,
+`email`,
+`password_hash`,
+`created_at`,
+`updated_at`)
+VALUES
+("Jane", "Doe", "janedoe@gmail.com", "abcd123", "2025-01-01", "2025-01-01");
+
+
 -- PROJECTS TABLE
 CREATE TABLE `projects` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -27,6 +38,17 @@ CREATE TABLE `projects` (
   KEY `created_by_fk_idx` (`created_by`),
   CONSTRAINT `created_by_fk` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `task_management`.`projects`
+(`name`,
+`description`,
+`created_by`,
+`is_archived`,
+`created_at`,
+`updated_at`)
+VALUES
+("Science Fair Project", "None", 1, 0, "2025-06-01", "2025-06-01");
+
 
 -- USER / PROJECT RELATIONSHIPS TABLE
 CREATE TABLE `user_projects` (
@@ -44,6 +66,15 @@ CREATE TABLE `user_projects` (
   CONSTRAINT `role_fk` FOREIGN KEY (`role`) REFERENCES `roles` (`id`),
   CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `task_management`.`user_projects`
+(`user_id`,
+`project_id`,
+`role`,
+`joined_at`)
+VALUES
+(1, 1, 1, "2025-06-01");
+
 
 -- PRIORITIES TABLE
 CREATE TABLE `priority` (
@@ -89,11 +120,10 @@ CREATE TABLE `tasks` (
   `project_id` int NOT NULL,
   `assigned_to` int DEFAULT NULL,
   `status` int NOT NULL,
-  `due_datee` datetime DEFAULT NULL,
+  `due_date` datetime DEFAULT NULL,
   `priority` int NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `completed` tinyint NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `project_id_fk1_idx` (`project_id`),
@@ -105,3 +135,17 @@ CREATE TABLE `tasks` (
   CONSTRAINT `project_id_fk1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   CONSTRAINT `status_fk1` FOREIGN KEY (`status`) REFERENCES `status` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `task_management`.`tasks`
+(`title`,
+`description`,
+`project_id`,
+`assigned_to`,
+`status`,
+`due_date`,
+`priority`,
+`created_at`,
+`updated_at`)
+VALUES
+("Bring plants", "None", 1, 1, 1, "2025-06-25", 3, "2025-06-01", "2025-06-01");
+
