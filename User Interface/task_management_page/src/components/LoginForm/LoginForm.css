@@ -1,0 +1,5 @@
+.background {
+    background-image: url('/bg_image.jpeg');
+    background-size: cover;
+    background-position: center;
+}
