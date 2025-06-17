@@ -6,14 +6,11 @@ import uvicorn  # , HTTPException, status
 # from database import engine, Base
 from api_groups.project_api import project_router
 from api_groups.user_api import user_router
+from auth import router
 
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
-app.include_router(project_router)
-app.include_router(user_router)
-
 
 origins = ["http://localhost:5173"]
 
@@ -25,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(router)  # auth router
+app.include_router(project_router)
+app.include_router(user_router)
 
 
 if __name__ == "__main__":
