@@ -25,34 +25,60 @@ const HomePage = () => {
 
   return (
     <>
-      <nav
-        className="navbar rounded"
+      <div
         style={{
-          margin: "5px",
-          backgroundColor: "#E97C75",
-          padding: "12px 24px",
-          borderBottom: "1px solid #ddd",
+          backgroundColor: "#6AA7C8",
+          minHeight: "100vh",
+          padding: "20px",
         }}
       >
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">
-            {user
-              ? `Welcome, ${user.first_name} ${user.last_name}`
-              : "Unable to Load User Name"}
-          </span>
-        </div>
-      </nav>
+        <nav
+          className="navbar rounded"
+          style={{
+            margin: "5px",
+            backgroundColor: "#40718B",
+            padding: "12px 24px",
+            borderBottom: "1px solid #ddd",
+          }}
+        >
+          <div className="container-fluid">
+            <span
+              className="navbar-brand mb-0 h1"
+              style={{ color: "white", fontSize: "30px" }}
+            >
+              {user
+                ? `Welcome, ${user.first_name} ${user.last_name}`
+                : "Unable to Load User Name"}
+            </span>
+          </div>
+        </nav>
 
-      <div className="card w-50 shadow ms-1">
-        <div className="card-body">
-          <h5 className="card-title">All Users</h5>
-          <ol className="list-group list-group-numbered">
-            {users.map((u) => (
-              <li className="list-group-item" key={u.id}>
-                {u.first_name} {u.last_name} – {u.email}
-              </li>
-            ))}
-          </ol>
+        <div className="card w-90 shadow ms-1 me-1">
+          <div className="card-body">
+            <h5 className="card-title">Users List</h5>
+            <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+              <table className="table table-striped table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((u) => (
+                    <tr>
+                      <td>{u.id}</td>
+                      <td>{u.first_name}</td>
+                      <td>{u.last_name}</td>
+                      <td>{u.email}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </>
