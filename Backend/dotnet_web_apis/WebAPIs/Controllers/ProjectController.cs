@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPIs.Models;
@@ -5,7 +6,7 @@ using WebAPIs.Models;
 namespace WebAPIs.Controllers
 {
     [ApiController]
-    [Route("api/projects")]
+    [Route("projects")]
     public class ProjectController : ControllerBase
     {
         private readonly TaskManagementContext _context;
@@ -15,7 +16,7 @@ namespace WebAPIs.Controllers
             _context = context;
         }
 
-        [HttpGet("/get_project/{id}")]
+        [HttpGet("get_project/{id}")]
         public async Task<ActionResult<Project>> GetProject(int id)
         {
             var project = await _context.Projects.FindAsync(id);
@@ -23,7 +24,7 @@ namespace WebAPIs.Controllers
             return project;
         }
 
-        [HttpPost("/create_project/")]
+        [HttpPost("create_project/")]
         public async Task<ActionResult<Project>> CreateProject(Project project)
         {
             _context.Projects.Add(project);
@@ -31,7 +32,7 @@ namespace WebAPIs.Controllers
             return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
         }
 
-        [HttpPut("/update_project/{id}")]
+        [HttpPut("update_project/{id}")]
         public async Task<IActionResult> UpdateProject(int id, Project project)
         {
             if (id != project.Id) return BadRequest();
@@ -48,7 +49,7 @@ namespace WebAPIs.Controllers
             return NoContent();
         }
 
-        [HttpDelete("/delete_project/{id}")]
+        [HttpDelete("delete_project/{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
             var project = await _context.Projects.FindAsync(id);

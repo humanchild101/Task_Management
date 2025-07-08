@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WebAPIs.Models;
 
@@ -21,7 +22,9 @@ public partial class Project
 
     public virtual User CreatedByNavigation { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
 
+    [JsonIgnore]
     public virtual ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
 }

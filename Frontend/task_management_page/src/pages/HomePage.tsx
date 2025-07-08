@@ -9,14 +9,14 @@ const HomePage = () => {
     const token = sessionStorage.getItem("token");
 
     axios
-      .get("http://localhost:8000/users/home", {
+      .get("http://localhost:5218/users/home", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data))
       .catch((err) => console.error("Error fetching user", err));
 
     axios
-      .get("http://localhost:8000/users/all", {
+      .get("http://localhost:5218/users/all", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUsers(res.data))

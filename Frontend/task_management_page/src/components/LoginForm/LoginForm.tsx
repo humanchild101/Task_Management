@@ -11,9 +11,9 @@ const LoginForm = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const result = await axios.post("http://localhost:8000/users/login", {
-        email,
-        password_hash,
+      const result = await axios.post("http://localhost:5218/auth/login", {
+        userEmail: email,
+        password: password_hash,
       });
 
       const token = result.data.access_token;
